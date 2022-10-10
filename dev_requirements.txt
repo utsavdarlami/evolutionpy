@@ -1,0 +1,8 @@
+loguru==0.6.0
+matplotlib==3.5.3
+numpy==1.23.2
+pydantic==1.9.2
+pytest==7.1.2
+rich==12.5.1
+Sphinx==5.2.3
+sphinx-rtd-theme==1.0.0
