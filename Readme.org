@@ -1,0 +1,9 @@
+* Evolutionpy
+
+Just another evolution based optimizer built using python.
+
+#+BEGIN_QUOTE
+NOTE:
+Work in Progress [WIP]
+Created to learn how python package is build.
+#+END_QUOTE
