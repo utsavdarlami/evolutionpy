@@ -26,19 +26,19 @@ from .selection import BaseSelection, SteadyStateSelection
 
 def default_crossover(crossover_probability: float) -> BaseCrossover:
     """Return a default crossover operator."""
-    # logger.warning("Crossover is not defined so using a default")
+    logger.info("Crossover is not defined so using a default")
     return SinglePointCrossover(crossover_probability=crossover_probability)
 
 
 def default_mutation(mutation_rate: float) -> BaseMutation:
     """Return a default mutation operator."""
-    # logger.warning("Mutation is not defined so using a default")
+    logger.info("Mutation is not defined so using a default")
     return RandomMutation(mutation_rate=mutation_rate)
 
 
 def default_selection(population: np.ndarray, population_size: int) -> BaseSelection:
     """Return a default selection operator."""
-    # logger.warning("Selection is not defined so using a default")
+    logger.info("Selection is not defined so using a default")
     return SteadyStateSelection(population, population_size)
 
 
@@ -56,8 +56,8 @@ class BaseGA(BaseOptimizer):
         fitness_func: Callable,
         population_size: int,
         num_generations: int,
-        mutation_rate: float = 0.0,
-        crossover_probability: float = 0.0,
+        mutation_rate: float = 0.1,
+        crossover_probability: float = 0.1,
         **kwargs: Any,
     ) -> None:
         """
@@ -88,20 +88,18 @@ class BaseGA(BaseOptimizer):
         self.best_generation: Optional[int] = None
         self.fitness_history: List[Union[int, float]] = []
         self.best_individual_history: List[np.ndarray] = []
-        self.default_operator()
 
     def default_operator(self):
         """Set Default operators."""
+        self.selection = default_selection(self.population, self.population_size)
         self.crossover = default_crossover(
             crossover_probability=self.crossover_probability
         )
-        self.selection = default_selection(self.population, self.population_size)
         self.mutation = default_mutation(mutation_rate=self.mutation_rate)
 
-    @abstractmethod
     def set_operators(self):
         """Set Operators."""
-        raise NotImplementedError
+        self.default_operator()
 
     def set_best_solution(self, fitness: np.ndarray, **kwargs):
         """

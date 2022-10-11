@@ -24,6 +24,10 @@ class BaseOptimizer(ABC):
         """Validate Operators used in the Optimizer."""
         raise NotImplementedError
 
+    @abstractmethod
+    def set_operators(self):
+        """Set Operators."""
+        raise NotImplementedError
 
 if __name__ == "__main__":
     pass
