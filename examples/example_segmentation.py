@@ -95,8 +95,6 @@ class CustomGA(BaseGA):
         self.crossover = SinglePointCrossover(
             crossover_probability=self.crossover_probability
         )
-        self.mutation_rate = 0.1
-        self.mutation = RandomMutation(mutation_rate=self.mutation_rate)
 
 
 if __name__ == "__main__":

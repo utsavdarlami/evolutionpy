@@ -26,20 +26,23 @@ from .selection import BaseSelection, SteadyStateSelection
 
 def default_crossover(crossover_probability: float) -> BaseCrossover:
     """Return a default crossover operator."""
-    logger.info("Crossover is not defined so using a default")
-    return SinglePointCrossover(crossover_probability=crossover_probability)
+    _crossover = SinglePointCrossover(crossover_probability=crossover_probability)
+    logger.warning(f"Crossover Operator was not defined, using fallback {_crossover}")
+    return _crossover
 
 
 def default_mutation(mutation_rate: float) -> BaseMutation:
     """Return a default mutation operator."""
-    logger.info("Mutation is not defined so using a default")
-    return RandomMutation(mutation_rate=mutation_rate)
+    _mutation = RandomMutation(mutation_rate=mutation_rate)
+    logger.warning(f"Mutation Operator was not defined, using fallback {_mutation}")
+    return _mutation
 
 
 def default_selection(population: np.ndarray, population_size: int) -> BaseSelection:
     """Return a default selection operator."""
-    logger.info("Selection is not defined so using a default")
-    return SteadyStateSelection(population, population_size)
+    _selection = SteadyStateSelection(population, population_size)
+    logger.warning(f"Selection Operator was not defined, using fallback {_selection}")
+    return _selection
 
 
 class BaseGA(BaseOptimizer):
@@ -157,11 +160,29 @@ class BaseGA(BaseOptimizer):
 
         self.population = offsprings
 
+    def validate_selection(self):
+        """Validate the `selection` operator."""
+        if not hasattr(self, "selection"):
+            self.selection = default_selection(self.population, self.population_size)
+        assert isinstance(self.selection, BaseSelection)
+
+    def validate_crossover(self):
+        """Validate the `selection` operator."""
+        if not hasattr(self, "crossover"):
+            self.crossover = default_crossover(self.crossover_probability)
+        assert isinstance(self.crossover, BaseCrossover)
+
+    def validate_mutation(self):
+        """Validate the `selection` operator."""
+        if not hasattr(self, "mutation"):
+            self.mutation = default_mutation(self.mutation_rate)
+        assert isinstance(self.mutation, BaseMutation)
+
     def validate_operators(self):
         """Validate the operators used in GA."""
-        assert isinstance(self.selection, BaseSelection)
-        assert isinstance(self.crossover, BaseCrossover)
-        assert isinstance(self.mutation, BaseMutation)
+        self.validate_selection()
+        self.validate_crossover()
+        self.validate_mutation()
 
     def run(self, **kwargs):
         """
@@ -175,6 +196,7 @@ class BaseGA(BaseOptimizer):
         -------
         None
         """
+        self.init_metrics_container()
         self.set_operators()
         self.validate_operators()
 
