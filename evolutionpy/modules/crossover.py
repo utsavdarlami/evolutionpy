@@ -25,6 +25,9 @@ class BaseCrossover(ABC):
         # logger.info(f"Performing {self.__class__.__name__} on the parents")
         return self._crossover(parents, offspring_size)
 
+    def __repr__(self):
+        """Class representation."""
+        return f'{type(self).__name__}()'
 
 class SinglePointCrossover(BaseCrossover):
     """SinglePointCrossover."""
@@ -144,3 +147,7 @@ class SinglePointCrossover(BaseCrossover):
             new_offspring_size, num_of_genes
         )
         return offsprings
+
+    def __repr__(self):
+        """Class representation."""
+        return f'{type(self).__name__}(crossover_probability={self.crossover_probability})'

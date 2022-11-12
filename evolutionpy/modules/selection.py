@@ -28,6 +28,10 @@ class BaseSelection(ABC):
         """Abstract function to implement selection function."""
         raise NotImplementedError
 
+    def __repr__(self):
+        """Class representation."""
+        return f'{type(self).__name__}(num_parents={self.num_parents})'
+
 
 class SteadyStateSelection(BaseSelection):
     """Peform SteadyStateSelection."""

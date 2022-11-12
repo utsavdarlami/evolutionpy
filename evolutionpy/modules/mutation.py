@@ -71,6 +71,10 @@ class BaseMutation(ABC):
         """Perform mutation."""
         raise NotImplementedError
 
+    def __repr__(self):
+        """Class representation."""
+        return f'{type(self).__name__}(mutation_rate={self.mutation_rate}, replace={self.replace})'
+
 
 class RandomMutation(BaseMutation):
     """Perform Random Mutation."""
