@@ -86,6 +86,8 @@ class BaseGA(BaseOptimizer):
         self.crossover_probability = crossover_probability
         self.mutation_rate = mutation_rate
 
+    def init_metrics_container(self):
+        """Initialize the containers/structures to store the metrics."""
         self.best_fitness: Optional[Union[int, float]] = None
         self.best_individual: Optional[np.ndarray] = None
         self.best_generation: Optional[int] = None
