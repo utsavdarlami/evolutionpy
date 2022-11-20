@@ -1,7 +1,7 @@
 import numpy as np
 
 
-def get_nparange_from_array(a: np.ndarray) -> np.ndarray:
+def get_nparange(a: np.ndarray) -> np.ndarray:
     """
     Apply func.
 
@@ -17,4 +17,6 @@ def get_nparange_from_array(a: np.ndarray) -> np.ndarray:
     -------
     >> [3,7] -> [3, 4, 5, 6]
     """
+    if a[0] == a[1]:
+        return np.arange(a[0], a[1] + 1)
     return np.arange(a[0], a[1])
