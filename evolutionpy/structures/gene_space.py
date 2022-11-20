@@ -57,4 +57,4 @@ class GeneSpace:
 
     def __repr__(self):
         """Class representation."""
-        return f'{type(self).__name__}(genes={self.genes})'
+        return f"{type(self).__name__}(genes={self.genes})"

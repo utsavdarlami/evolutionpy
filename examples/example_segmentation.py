@@ -5,10 +5,11 @@ Segment passed image.
 """
 import argparse
 import os
+
 import numpy as np
+from loguru import logger
 from scipy import stats
 from skimage import color, io
-from loguru import logger
 
 # evolutionpy
 from evolutionpy.modules.crossover import SinglePointCrossover
@@ -32,8 +33,7 @@ def entropy_of_pixel(pixels: np.ndarray, base=None) -> float:
     return ent
 
 
-def calculate_segment_entropy(image: np.ndarray,
-                              thresh: np.ndarray = None) -> float:
+def calculate_segment_entropy(image: np.ndarray, thresh: np.ndarray = None) -> float:
     """
     Caculate the average entropy of the regions segmented \
     using the thresholds.
@@ -54,7 +54,7 @@ def calculate_segment_entropy(image: np.ndarray,
         region_entropy = entropy_of_pixel(segmented_pixels)
         sum_of_entropies += region_entropy
 
-    return sum_of_entropies/(len(thresh)+1)
+    return sum_of_entropies / (len(thresh) + 1)
 
 
 def fitness_func(individual: np.ndarray, **kwargs) -> float:
@@ -70,8 +70,7 @@ def fitness_func(individual: np.ndarray, **kwargs) -> float:
         return 0.0
     # Entropy of the segmented pixel could be a one measure for the fitness
     # we can also add variance as the mesasure of fitness
-    fitness = calculate_segment_entropy(x_image,
-                                        thresh=individual)
+    fitness = calculate_segment_entropy(x_image, thresh=individual)
     return fitness
 
 
@@ -110,19 +109,20 @@ if __name__ == "__main__":
     num_generations = args.num_gen
     population_size = 100  # Number of solutions in the population.
 
-    bounds = {'low': 0, 'high': 255}
+    bounds = {"low": 0, "high": 255}
 
-    gene_space = GeneSpace(bounds, num_of_genes=n_classes-1)
+    gene_space = GeneSpace(bounds, num_of_genes=n_classes - 1)
 
     logger.info(image_path)
 
     x_image = io.imread(image_path, as_gray=True)
 
-    image_segmenter = CustomGA(fitness_func=fitness_func,
-                               gene_space=gene_space,
-                               num_generations=num_generations,
-                               population_size=population_size,
-                               )
+    image_segmenter = CustomGA(
+        fitness_func=fitness_func,
+        gene_space=gene_space,
+        num_generations=num_generations,
+        population_size=population_size,
+    )
 
     logger.info("Performing Segmentation of image")
     image_segmenter.run()

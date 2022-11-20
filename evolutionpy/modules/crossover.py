@@ -10,7 +10,12 @@ from .utils import get_nparange_from_array
 
 
 class BaseCrossover(ABC):
-    """Base Crossover class."""
+    """
+    Base Crossover class.
+
+    References:
+    - https://www.wikiwand.com/en/Crossover_(genetic_algorithm)
+    """
 
     @abstractmethod
     def _crossover(
@@ -27,7 +32,8 @@ class BaseCrossover(ABC):
 
     def __repr__(self):
         """Class representation."""
-        return f'{type(self).__name__}()'
+        return f"{type(self).__name__}()"
+
 
 class SinglePointCrossover(BaseCrossover):
     """SinglePointCrossover."""
@@ -71,7 +77,7 @@ class SinglePointCrossover(BaseCrossover):
 
         Args:
         -----
-        np.ndararay
+        np.ndararay: crossover point idx to get the crossover-mask
 
         Return:
         -------
@@ -150,4 +156,6 @@ class SinglePointCrossover(BaseCrossover):
 
     def __repr__(self):
         """Class representation."""
-        return f'{type(self).__name__}(crossover_probability={self.crossover_probability})'
+        return (
+            f"{type(self).__name__}(crossover_probability={self.crossover_probability})"
+        )

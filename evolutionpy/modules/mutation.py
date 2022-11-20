@@ -73,7 +73,7 @@ class BaseMutation(ABC):
 
     def __repr__(self):
         """Class representation."""
-        return f'{type(self).__name__}(mutation_rate={self.mutation_rate}, replace={self.replace})'
+        return f"{type(self).__name__}(mutation_rate={self.mutation_rate}, replace={self.replace})"
 
 
 class RandomMutation(BaseMutation):
