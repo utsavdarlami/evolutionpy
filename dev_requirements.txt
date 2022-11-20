@@ -1,5 +1,7 @@
+furo==2022.9.29
 loguru==0.6.0
 matplotlib==3.5.3
+myst-parser==0.18.1
 numpy==1.23.2
 pydantic==1.9.2
 pytest==7.1.2
