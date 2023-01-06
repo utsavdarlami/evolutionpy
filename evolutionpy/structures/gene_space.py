@@ -18,7 +18,7 @@ class GeneSpace:
     def __init__(
         self,
         data: Any = None,
-        num_of_genes: int = None,
+        num_of_genes: int | None = None,
         copy: bool | None = None,
         **kwargs,
     ):

@@ -36,7 +36,9 @@ def list_to_genes(data: List[ANYGENETYPE], **kwargs) -> List[Gene]:
     return _genes
 
 
-def dict_to_genes(data: DICTGENETYPE, num_of_genes: int = None, **kwargs) -> List[Gene]:
+def dict_to_genes(
+    data: DICTGENETYPE, num_of_genes: int | None = None, **kwargs
+) -> List[Gene]:
     """Forming gene space from dict."""
     if not num_of_genes or num_of_genes < 1:
         raise ValueError(
