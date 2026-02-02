@@ -17,6 +17,9 @@ class BaseConfig:
 
 @dataclass(config=BaseConfig)
 class Gene:
+    """
+    Gene represets a single chromosome of a individual in the Genetic Algorithm.
+    """
 
     low: GENETYPE
     high: GENETYPE
@@ -44,6 +47,38 @@ class Gene:
             "high": high,
         }
         return cls(**gene_, **kwargs)
+
+    @property
+    def random_value(self) -> np.ndarray:
+        """Get random value from the Gene."""
+        raise AssertionError
+
+
+class CategoryGene(Gene):
+    """
+    TODO: Handle categorical values
+    """
+
+    pass
+
+
+class IntegerGene(Gene):
+    """
+    TODO: Handle integer values
+    """
+
+    @property
+    def random_value(self) -> np.ndarray:
+        """Get a uniform random value."""
+        return np.random.uniform(low=self.low, high=self.high, size=1, dtype=np.int32)[
+            0
+        ]
+
+
+class FloatGene(Gene):
+    """
+    TODO: Handle float values
+    """
 
     @property
     def random_value(self) -> np.ndarray:

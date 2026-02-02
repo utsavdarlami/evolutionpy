@@ -78,6 +78,9 @@ if __name__ == "__main__":
 - Motivated from [[https://github.com/ahmedfgad/GeneticAlgorithmPython][PyGAD]] : Genetic Algorithm in Python
 - https://github.com/gugarosa/opytimizer
 - https://github.com/ljvmiranda921/pyswarms
+- https://github.com/rodrigo-arenas/Sklearn-genetic-opt
+- https://github.com/jMetal/jMetalPy
+- https://github.com/MaxHalford/eaopt
 
 ** Contribution Guidelines
 - Currently not looking for contributions

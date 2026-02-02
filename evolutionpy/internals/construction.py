@@ -51,9 +51,7 @@ def dict_to_genes(
             f"high and low should not be None but {high} and {low} was passed respectively."
         )
     # skip = value.get("skip", None)
-    values: List = []
-    for i in range(int(num_of_genes)):
-        values.append([low, high])
+    values = [[low, high] for _ in range(int(num_of_genes))]
 
     genes = list_of_list_to_genes(values, **kwargs)
     return genes
